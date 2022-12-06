@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ shop.name }}{% endblock %}
+
+{% block body %}
+<div id="shop" class="container-xl">
+    <div class="row mt-5">
+        <a href="{{ path('app_shop_list') }}" class="d-flex align-items-center gap-4 text-decoration-none text-black-50">
+            <i class="fa-solid fa-arrow-left"></i>
+            <p class="m-0">Back to product list</p>
+        </a>
+    </div>
+    <div class="d-flex align-items-center gap-4 mt-5">
+        <p class="display-4 mr-4 mb-0">{{  shop.name }}</p>
+    </div>
+   <div class="mt-5">
+       <div class="row fs-5">
+           <p class="col-sm-2 fw-bolder">Price for 1 kg</p>
+           <p class="col-sm-2">{{ shop.price|format_currency('MDL') }}</p>
+       </div>
+       <div class="row fs-5">
+           <p class="col-sm-2 fw-bolder">Count</p>
+           <p class="col-sm-2">{{ shop.count }} </p>
+       </div>
+       <div class="row fs-5">
+           <p class="col-sm-2 fw-bolder">City</p>
+           <p class="col-sm-auto">{{ shop.city.name }}</p>
+       </div>
+       <div class="row fs-5">
+           <p class="col-sm-2 fw-bolder">Country</p>
+           <p class="col-sm-2">{{ shop.city.country.name }}</p>
+       </div>
+
+
+   </div>
+    <div class="mt-5">
+        <p class="h3">Status of order</p>
+        <div class="mt-4">
+            {% for shopproduct in shop.shopProducts %}
+                {% if shopproduct.status == 'available' %}
+                    <p>* Order is ready</p>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

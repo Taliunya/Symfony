@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shop{% endblock %}
+
+{% block body %}
+<div id="shop-update" class="w-25 mx-auto">
+        <div class="row mb-3 mt-3">
+                <a href="{{ path('app_shop_list') }}" class="d-flex align-items-center gap-4 text-decoration-none text-black-50">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <p class="m-0">Back to product list</p>
+                </a>
+        </div>
+        <div class="h2 mb-4">Change product</div>
+        {% for alert in app.flashes('success') %}
+                <div class="alert alert-success" role="alert">
+                        {{ alert }}
+                </div>
+        {% endfor %}
+        {{ form_start(form) }}
+                <div class="form-group mt-2">
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name) }}
+                        <span class="text-danger">
+                                {{ form_errors(form.name) }}
+                        </span>
+                </div>
+                <div class="form-group mt-2">
+                        {{ form_label(form.count) }}
+                        {{ form_widget(form.count) }}
+                        <span class="text-danger">
+                                {{ form_errors(form.count) }}
+                        </span>
+                </div>
+                <div class="form-group mt-2">
+                        {{ form_label(form.price) }}
+                        {{ form_widget(form.price) }}
+                        <small class="form-text text-muted">{{ form_help(form.price) }}</small>
+                </div>
+                <div class="form-group mt-2">
+                        {{ form_label(form.city) }}
+                        {{ form_widget(form.city) }}
+                        <span class="text-danger">
+                                {{ form_errors(form.city) }}
+                        </span>
+                </div>
+                 <div class="form-group mt-2">
+                        {{ form_label(form.shop_products) }}
+                        {{ form_widget(form.shop_products) }}
+                        <span class="text-danger">
+                                {{ form_errors(form.shop_products) }}
+                        </span>
+                </div>
+                <div class="form-group mt-3">
+                        {{ form_row(form.save) }}
+                </div>
+        {{ form_end(form) }}
+</div>
+{% endblock %}

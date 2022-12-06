@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto mt-5">
+        {% if shops|length == 0 %}
+            <div class="alert alert-danger" role="alert">
+                Product is not found
+            </div>
+        {% endif %}
+
+        <h1>Search product</h1>
+
+        {{ form_start(form) }}
+        <div class="form-group mt-2">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            <span class="text-danger">
+                {{ form_errors(form.name) }}
+            </span>
+        </div>
+        <div class="form-group mt-2">
+            {{ form_label(form.price) }}
+            {{ form_widget(form.price) }}
+            <small class="form-text text-muted">{{ form_help(form.price) }}</small>
+        </div>
+        <div class="form-group mt-2">
+            {{ form_label(form.order) }}
+            {{ form_widget(form.order) }}
+            <small class="form-text text-muted">{{ form_help(form.order) }}</small>
+        </div>
+
+        <div class="form-group mt-3">
+            {{ form_row(form.save) }}
+        </div>
+        {{ form_end(form) }}
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Count</th>
+                <th scope="col">Manage</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for shop in shops %}
+                <tr>
+                    <td>{{ shop.id }}</td>
+                    <td>{{ shop.name }}</td>
+                    <td>{{ shop.price }}</td>
+                    <td>{{ shop.count }}</td>
+                    <td>
+                        <a href="{{ path('app_shop_single', { id: shop.id }) }}" class="btn btn-primary">View</a>
+                        <a href="{{ path('app_shop_update', { id: shop.id }) }}" class="btn btn-primary">Modify</a>
+                        <a href="{{ path('app_shop_remove', { id: shop.id }) }}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div>
+            <a href="{{ path('app_shop_add') }}" class="btn btn-primary text-white">Add</a>
+            <a href="{{ path('app_shop_search') }}" class="btn btn-info text-white">Search</a>
+        </div>
+    </div>
+{% endblock %}
